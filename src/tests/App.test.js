@@ -1,6 +1,6 @@
+import { screen } from '@testing-library/react';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+//import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -10,11 +10,18 @@ describe('Testes da aplicação', () => {
     mesmos sejam executados.
   */
 
-  test.todo('1 - Conferir se o título "Par ou Ímpar" aparece na página.');
+  test('1 - Conferir se o título "Par ou Ímpar" aparece na página.', () => {
+    renderWithRouter(<App />)
+    const parouimpa = screen.getByRole('heading', {name: 'Par ou Ímpar'})
+    expect(parouimpa).toBeInTheDocument();
+  });
   //Neste teste você deseja visualizar o elemento com o título.
   //Não esqueça de conferir o código da aplicação para entender o contexto.
 
-  test.todo('2 - Acessando a partir da Home a página About.');
+  todo('2 - Acessando a partir da Home a página About.', () => {
+    //renderWithRouter(<App />)
+    
+  });
   //Neste teste você deseja trabalhar com a navegação de rotas.
   //Você pode utilizar os links da própria tela para isso.
 
