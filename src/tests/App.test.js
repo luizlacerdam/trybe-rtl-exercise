@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 //import userEvent from '@testing-library/user-event';
 import App from '../App';
@@ -18,14 +19,20 @@ describe('Testes da aplicação', () => {
   //Neste teste você deseja visualizar o elemento com o título.
   //Não esqueça de conferir o código da aplicação para entender o contexto.
 
-  todo('2 - Acessando a partir da Home a página About.', () => {
-    //renderWithRouter(<App />)
-    
+  test('2 - Acessando a partir da Home a página About.', () => {
+    renderWithRouter(<App />)
+    const linkAbout = screen.getByRole('link', { name: 'Sobre'})
+    userEvent.click(linkAbout)
+    const titleAbout = screen.getByRole('heading', { level: 1, nome: 'Sobre o Par ou Ímpar'})
+    expect(titleAbout).toHaveTextContent(/sobre o par ou Ímpar/i)
   });
   //Neste teste você deseja trabalhar com a navegação de rotas.
   //Você pode utilizar os links da própria tela para isso.
 
-  test.todo('3 - Disparar a mensagem de "Página não encontrada" ao acessar uma rota inválida.');
+  test('3 - Disparar a mensagem de "Página não encontrada" ao acessar uma rota inválida.', () => {
+    const { history } = renderWithRouter(<App />)
+    history.push('/xablau')
+  });
   //Neste teste você deseja acessar uma rota inválida.
 
   test.todo('4 - Validar a existência de 2 botões na tela.');
