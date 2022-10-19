@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 //import userEvent from '@testing-library/user-event';
@@ -31,7 +31,11 @@ describe('Testes da aplicação', () => {
 
   test('3 - Disparar a mensagem de "Página não encontrada" ao acessar uma rota inválida.', () => {
     const { history } = renderWithRouter(<App />)
-    history.push('/xablau')
+    act(() => {
+      history.push('/notfound');
+      }) 
+    const title = screen.getByRole('heading', { level: 1, name: 'Página não encontrada!' })
+    expect(title).toHaveTextContent('Página não encontrada!')
   });
   //Neste teste você deseja acessar uma rota inválida.
 
